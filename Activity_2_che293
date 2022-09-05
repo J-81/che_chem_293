@@ -1,0 +1,12 @@
+What does the model achieve?
+Figure out the linear relationship between temperature and pressure of air
+How should metrics be interpreted?
+The independent variable is the temperature in the unit of Kelvin, and the dependent variable is pressure in the unit of Pascal
+What are appropriate use cases?
+Temperature and pressure of a gas are typically two variables that fit with a linear relationship while applying the ideal gas law.
+How is it implemented?
+Applying linear regression to the data. And we should not misuse the data.
+What are caveats/biases/concerns to its usage?
+The data is fake, and we should gain real data from experiments.
+How to interpret this specific result and advising action/next steps?
+Pressure of the air is directly proportional to the temperature. Therefore, when we store gas tanks, we should advisely store them in a cool place.
