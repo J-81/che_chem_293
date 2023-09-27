@@ -18,29 +18,40 @@
   - [Background](#background-2)
   - [Description](#description-3)
 
-## Activity 4.1: Exploring ChimeraX
+## Activity 4.1: Template Free Folding on RNA
 
 ### Description
 
-In this exercise, you will explore some proteins from RCSB using chimeraX.
+In this exercise, you will perform an ab initio folding of an RNA sequence using a web server called [RNAComposer](https://rnacomposer.cs.put.poznan.pl/). In the interest of comparing the folded model to an actual structure you will use the [RCSB](https://www.rcsb.org/) to obtain a structure of the same sequence.
 
 ### Steps
 
-1. Open ChimeraX and run the following commands in the 'Command' box at the bottom of the screen (you will explain what each command does as part of this report):
-   1. `open 4jjx`
-   2. `color bychain`
-   3. `select #1/A` # Look for the green outline around parts of the protein after you run this command
-   4. `rainbow sel`
-   5. `select ~sel`
-   6. `delete sel`
-   7. `surface`
-   8. `color byhetero` # Hover your mouse over the newly colored atoms, What do the colors denote? Red,Blue, Yellow? 
-   9. `~surface` # What does the '~' tilde character mean? This is the second time we have used it
-   10. `distance #1/A:0@CA #1/A:171@CA` # What value does this compute? (Clue it is a parameter from our structures lecture this week)
-   11. `hbonds reveal true` # What does this show? What can you conclude about the relationship between hydrogen bonds and the secondary structures (helices and sheets)?
-2. Rotate your protein to showcase the distance and save this as a png file.
-3. Write a report to explain what each of these commands AND answer the questions for each command.
-4. Upload the mini-report (including the explanation of commands, image and image caption) to Canvas
+1. Navigate to the [RCSB](https://www.rcsb.org/) and find `1EC6` (this is a complex that includes the structure of the RNA sequence you will fold).
+2. Retrieve the fasta record associated with the RNA molecule.
+3. Navigate to the [RNAComposer](https://rnacomposer.cs.put.poznan.pl/) web server.
+4. Paste the fasta record into the interactive mode window.
+   1. Rename the header portion of the record with a name of your choice. Do not include any spaces but keep the `>` at the start.  The original RCSB name will raise an error.
+   2. Add `RNAfold` as a final third line.  This is a web server specific directive that will run the RNAfold program as part of the overall modeling process.
+5. Hit `Compose` to start the modeling.  Runtime should be minutes at most.
+6. Download the resulting model pdb file.
+7. Compare the model against the structure in complex
+   1. Open ChimeraX
+   2. Load the model pdb file
+   3. Load 1EC6 (`open 1ec6`)
+   4. Run `tools -> structure analysis -> matchmaker`
+      1. In matchmaker window
+         1. Select `Alignment` tab
+         2. Select `Nucleic` from matrix dropdown
+      2. Select `OK`
+         1. Matchmaker will now run.  Read the [documentation page](https://www.rbvi.ucsf.edu/chimerax/docs/user/tools/matchmaker.html) for Matchmaker to understand the major steps.
+8. Report the following:
+   1. Include an image of the superimposed structures.
+   2. Answer the following questions:
+      1. Is RNAComposer an ab initio method?
+      2. What does Matchmaker perform before superimposing the structures?
+      3. If we did not set the matrix to nucleic, the default was `blosum62` which would raise an error. Why would `blosum62` raise an exception for this comparison?
+      4. Are all nucleotides in the model superimposed on the experimental structure? Why or why not? (Hint: Is it solely a modeling issue or is there something else biologically significant going on?)
+
 
 ---
 
@@ -48,7 +59,7 @@ In this exercise, you will explore some proteins from RCSB using chimeraX.
 
 ### Background
 
-Homology modelling attempts to predict the structure of a query primary sequence by comparison to a database of known structures. 
+Homology modelling attempts to predict the structure of a query primary sequence by comparison to a database of known structures.
 
 ### Description
 
@@ -83,7 +94,26 @@ In this exercise, you will use the Swiss Model server to predict the structure o
 
 ---
 
-## Activity 4.3: Docking using Webina (A port of AutoDock Vina)
+## Activity 4.3: Running AlphaFold2 in Colab
+
+### Background
+
+In this exercise, you will run the AlphaFold2 protein structure prediction software in Google Colab.  You will also modify the default query sequence to see how the prediction changes.
+
+### Description
+
+1. Navigate to the [colab notebook](https://colab.research.google.com/github/sokrypton/ColabFold/blob/main/AlphaFold2.ipynb)
+2. Run the notebook as is.  While the notebook is running, read the Alphafold database [FAQ](https://alphafold.ebi.ac.uk/faq) specifically focusing on question `How confident should I be in a prediction?`.
+3. Open a new instance of the notebook (we will be comparing between the original and this modified version), this time modify the query sequence by adding a string of Alanines to the end of the query (about 5-10 should be good).
+4. Rerun the notebook.
+5. Comparing the two predictions, answer the following questions:
+   1. Which prediction is overall more confident?
+   2. What regions of the modified query are predicted with low confidence?
+   3. What is the secondary structure of the modified region (polymeric Alanine) in the prediction?
+   4. What does the `Sequence coverage` plot denote?
+
+---
+## Activity 4.4: Docking using Webina (A port of AutoDock Vina)
 
 ### Background
 
@@ -130,27 +160,3 @@ The input files have been prepared for you (using ChimeraX) and are as follows:
 8. Upload the answers to the questions and screenshot for this activity.
 
 ---
-
-## Activity 4.4: Interpreting Molecular Dynamics Plots
-
-### Background
-
-Molecular dynamics (MD) output a series of positions and velocities for an input set of atoms over the course a simulation.  Plots serve as a powerful means of conveying the stability of the simulated complex at a whole molecule and specific residue view.
-
-For this activity, you will explore an article presenting MD plots and a manual for an MD library.  The manual includes example figures and you will interpret these plots.
-
-### Description
-
-1. Use Figure 5 from understanding-thermal-and-organic-solvent-stability-of-thermoalkalophilic-lipases-insights-from-computational-predictions-and-experiments.pdf Article (on Canvas)
-   1. In the 450K simulation when did the stability of the Open State form start to degrade in Methanol? Explain how you reached this conclusion
-   2. Imagine you ran 20 ns simulations for this same set of conditions, what is a risk very short simulations?
-   3. At 450K, is the effect of simulation solvent dependent on the protein form (i.e. open or closed), why or why not? Speculate on a reason for this depedency or lack of dependency.
-2. Navigate to https://cran.r-project.org/web/packages/MDplot/vignettes/publication.pdf
-3. Answer the following questions for Figure 11.
-   1. Does this plot convey information about the whole system or specific residues in the system?
-   2. What was the approximate simulation time?
-   3. Comparing WildType(WT) and Mutant, suppose the researcher was designing a mutation that was with the goal of destabilizing the protein.  Based on this plot, was is this mutation likely to destabilize the protein? Why or why not?
-4. Answer the following questions for Figure 13.
-   1. Does this plot convey information about the whole system or specific residues in the system?
-   2. What regions of the molecule are relatively stable? What regions are relatively unstable?
-5. Upload the writeup to Canvas
