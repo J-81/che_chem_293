@@ -4,19 +4,6 @@
 
 ---
 
-- [Activity 4.1: Exploring ChimeraX](#activity-41-exploring-chimerax)
-  - [Description](#description)
-  - [Steps](#steps)
-- [Activity 4.2: Homology Modelling with Swiss Model](#activity-42-homology-modelling-with-swiss-model)
-  - [Background](#background)
-  - [Description](#description-1)
-  - [Steps](#steps-1)
-- [Activity 4.3: Docking using Webina (A port of AutoDock Vina)](#activity-43-docking-using-webina-a-port-of-autodock-vina)
-  - [Background](#background-1)
-  - [Description](#description-2)
-- [Activity 4.4: Interpreting Molecular Dynamics Plots](#activity-44-interpreting-molecular-dynamics-plots)
-  - [Background](#background-2)
-  - [Description](#description-3)
 
 ## Activity 4.1: Template Free Folding on RNA
 
