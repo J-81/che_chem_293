@@ -115,6 +115,8 @@ In this exercise, you will run the AlphaFold2 protein structure prediction softw
 ---
 ## Activity 4.4: Docking using Webina (A port of AutoDock Vina)
 
+# NOTE: IF HAVING ISSUES RUNNING WEBINA, PLEASE NOTE THAT AN USE THE TABLE IN THE IMAGE BELOW TO ANSWER THE QUESTIONS.
+
 ### Background
 
 Molecular Docking can be used to predict energetically plausible interactions between proteins and ligands.  Inputs are the two molecules of interest and often times a designation about the region of the protein to search interactions against.  In the exercise, you will use a web server called [Webina](https://academic.oup.com/bioinformatics/article/36/16/4513/5860016).
